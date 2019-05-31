@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <link href="style/style.css" rel="stylesheet" type="text/css" media="all"/>
     <script src="assets/node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.validate.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
 
     <meta name="robots" content="noindex,nofollow"/>
 </head>
@@ -16,21 +14,20 @@
         <form action="process.php" method="post" id="register_form">
             <p class="validate_msg">Please fix the errors below!</p>
 
-            <p><label for="fname">First Name</label> <input id="fname" name="fname" type="text"/> <span class="val_fname"></span>
+            <p><label for="fname">First Name</label> <input id="fname" name="fname" type="text" data-rule="#val_fname"/> <span id="val_fname" class="err-msg" hidden>First name is empty !</span>
             </p>
-            <p><label for="lname">Last Name</label> <input id="lname" name="lname" type="text"/> <span class="val_lname"></span>
+            <p><label for="lname">Last Name</label> <input id="lname" name="lname" type="text" data-rule="#val_lname"/> <span id="val_lname" class="err-msg" hidden>Last Name is empty !</span>
+        </p>
+            <p><label for="email">Your Email</label> <input name="email" type="text" id="email" data-rule="#val_email"/> <span id="val_email" class="err-msg" hidden>Email is empty</span>
             </p>
-            <p><label for="email">Your Email</label> <input name="email" type="text" id="email"/> <span class="val_email"></span>
+            <p><label for="password">Password</label> <input name="password" type="password" id="password" data-rule="#val_pass"/> <span id="val_pass" class="err-msg" hidden>Password is empty</span>
+            <p><label for="repassword">Retype Password</label> <input name="repassword" type="password"  data-rule="#val_pass2" id="repassword"/> <span id="val_pass2" class="err-msg" hidden>Re-Password is empty</span>
             </p>
-            <p><label for="password">Password</label> <input name="password" type="password" id="password"/> <span class="val_pass"></span>
-            </p>
-            <p><label for="repassword">Retype Password</label> <input name="repassword" type="password" id="repassword"/> <span class="val_pass2"></span>
-            </p>
-            <p><label for="phone">Phone No.</label> <input name="phone" type="number" id="phone"/> <span class="val_phone"></span>
+            <p><label for="phone">Phone No.</label> <input name="phone" type="number" id="phone" minlength="10"  data-rule="#val_phone"/> <span id="val_phone" class="err-msg" hidden>Your Phone Number is empty</span>
             </p>
 
             <p><label for="birth">Birth Date</label>
-                <select name="month" id="birth">
+                <select name="month" id="birth" data-rule="#val_bday">
                     <option value="">Month</option>
                     <option value="1">Jan</option>
                     <option value="2">Feb</option>
@@ -45,7 +42,7 @@
                     <option value="11">Nov</option>
                     <option value="12">Dec</option>
                 </select>
-                <select name="day" >
+                <select name="day" data-rule="#val_bday">
                     <option value="">Day</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -79,7 +76,7 @@
                     <option value="30">30</option>
                     <option value="31">31</option>
                 </select>
-                <select name="year">
+                <select name="year" data-rule="#val_bday">
                     <option value="">Year</option>
                     <option value="2019">2019</option>
                     <option value="2018">2018</option>
@@ -152,40 +149,89 @@
                     <option value="1951">1951</option>
                     <option value="1950">1950</option>
                 </select>
-                <span class="val_bday"></span></p>
+                <span id="val_bday" hidden>Isi mmk</span></p>
 
-            <p><label for="gender">Gender</label> <input name="gender" type="radio" value="m" id="gender"/> Male <input
-                    name="gender" type="radio" value="f"/> Female <span class="val_gen"></span></p>
+            <p><label for="gender">Gender</label>
+                <input name="gender" data-rule="#val_gen" type="radio" value="m"/> Male
+                <input name="gender" data-rule="#val_gen" type="radio" value="f"/> Female
+                <span id="val_gen" hidden>Gender is missing !</span>
+            </p>
 
             <input type="submit" name="submit" value="Register" id="submit">
         </form>
-
     </div>  <!--wrap2 end-->
 </div><!--wrap start-->
 
 <script type="text/javascript">
 	$(document).ready(function() {
 
-	    var fname = $('#fname').val();
-        var lname = $('#lname').val();
-        var password = $('#email').val();
-        var repassword = $('#repassword').val();
-        var phone = $('#phone').val();
+        $("#register_form").on('submit',function(e){
+            // e.preventDefault();
 
+            var err1 = false,
+                err2 = false,
+                err3 = false,
+                err4 = false;
 
+            $(".err-msg").hide()
+            //Check input text
+            $("input").each(function(){
+                $el = $(this).data("rule");
+                if($(this).val() === ""){
+                    $($el).show();
+                    err1 = true;
+                    $('.validate_msg').show()
+                } else {
+                    $($el).hide()
 
-        // if (fname.length < 1){
-        //     $('#fname').after('<span class="error">This field is required</span>);
-        // }
-        $('#submit').click(function () {
-            if ($('#fname').val() == ""){
-                alert("Input Name");
-                return false;
-            } else if ($('#lname').val() == ""){
-                $("#val_lname").text('Last Name is Empty !');
-            } else if ($('#email').val().isEmpty()){
+                }
+            });
 
+            //Check select type
+            $("select").each(function(){
+                $el = $(this).data("rule");
+                
+                if($(this).val() === ""){
+                    $($el).show()
+                    err2 = true;
+                } else {
+                    $($el).hide()
+                }
+            })
+
+            if($("input[name=repassword]").val() !== "" && $("input[name=repassword]").val() !== $("input[name=password]").val()){
+                $("#val_pass2").text("Password type doesn't match")
+                $("#val_pass2").show()
+                err3 = true;
+                
+            } else {
+                // $("#val_pass2").hide()                
             }
+
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if($("input[name=email]").val() !== "" && !re.test($("input[name=email]").val())){
+                $("#val_email").text("Wrong email format")
+                $("#val_email").show()
+                err4 = true;
+                
+            } else {
+                // $("#val_email").hide()                
+                
+            }
+
+            if(!err1 && !err2 && !err3 && !err4) {
+                // $(this).submit();
+                return true;
+            } else {
+                return false;
+            }
+
+
+
+        });
+
+        // $('#submit').click(function (e) {
+
 
             // $('#val_fname').each(function () {
             //     if ($trim($('#val_fname').val()).length() == 0){
@@ -214,7 +260,7 @@
             //         form.submit();
             //     }
             // });
-        });
+        // });
 
 
 
