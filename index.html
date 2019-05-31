@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link href="style/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="assets/node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="jquery.validate.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
@@ -166,7 +166,55 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-	    $("#fname").validate();
+	    var fname = $('#fname').val();
+        var lname = $('#lname').val();
+        var password = $('#email').val();
+        var repassword = $('#repassword').val();
+        var phone = $('#phone').val();
+
+
+
+        // if (fname.length < 1){
+        //     $('#fname').after('<span class="error">This field is required</span>);
+        // }
+        $('#submit').click(function () {
+            if ($('#fname').val() == ""){
+                alert("Input Name");
+                return false;
+            } else if ($('#lname').val() == ""){
+                $("#val_lname").text('Last Name is Empty !');
+            } else if ($('#email').val().isEmpty()){
+
+            }
+
+            // $('#val_fname').each(function () {
+            //     if ($trim($('#val_fname').val()).length() == 0){
+            //         $('#val_fname').addClass()
+            //     }
+            // })
+
+            // $("form[name='register_form']").validate({
+            //     rules:{
+            //         fname:{
+            //             required: true,
+            //             minlength: 3
+            //         },
+            //         lname:{
+            //             required: true,
+            //             minlengeth: 3
+            //         },
+            //         email:{
+            //             required: true
+            //
+            //         }
+            //     },
+            //     messages:{
+            //         fname: "Field is required !"
+            //     }, submitHandler: function(form){
+            //         form.submit();
+            //     }
+            // });
+        });
 
 
 
