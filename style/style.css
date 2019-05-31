@@ -44,6 +44,11 @@ form#register_form input[type='text'], input[type='password'] {
 	margin:0;
 	padding:5px;
 }
+
+form#register_form select[name="prodi"], select[name="angkatan"]  {
+	width: 200px;
+}
+
 form#register_form select {
     border: 1px solid #CCCCCC;
     display: inline-block;

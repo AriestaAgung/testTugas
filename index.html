@@ -16,14 +16,40 @@
 
             <p><label for="fname">First Name</label> <input id="fname" name="fname" type="text" data-rule="#val_fname"/> <span id="val_fname" class="err-msg" hidden>First name is empty !</span>
             </p>
-            <p><label for="lname">Last Name</label> <input id="lname" name="lname" type="text" data-rule="#val_lname"/> <span id="val_lname" class="err-msg" hidden>Last Name is empty !</span>
-        </p>
+            <p><label for="lname">Last Name</label> <input id="lname" name="lname" type="text" data-rule="#val_lname"/> <span id="val_lname" class="err-msg" hidden>Last Name is empty !</span></p>
             <p><label for="email">Your Email</label> <input name="email" type="text" id="email" data-rule="#val_email"/> <span id="val_email" class="err-msg" hidden>Email is empty</span>
             </p>
-            <p><label for="password">Password</label> <input name="password" type="password" id="password" data-rule="#val_pass"/> <span id="val_pass" class="err-msg" hidden>Password is empty</span>
-            <p><label for="repassword">Retype Password</label> <input name="repassword" type="password"  data-rule="#val_pass2" id="repassword"/> <span id="val_pass2" class="err-msg" hidden>Re-Password is empty</span>
+            <p><label for="kampus">Kampus</label> <input name="kampus" type="text" id="kampus" data-rule="#val_kampus"/> <span id="val_kampus" class="err-msg" hidden>Kampus is empty</span>
             </p>
-            <p><label for="phone">Phone No.</label> <input name="phone" type="number" id="phone" minlength="10"  data-rule="#val_phone"/> <span id="val_phone" class="err-msg" hidden>Your Phone Number is empty</span>
+
+
+            <p><label for="prodi">Prodi</label>
+                <select name="prodi" id="prodi" data-rule="#val_prodi">
+                    <option value="">Prodi</option>
+                    <option value="1">Teknik Informatika</option>
+                    <option value="2">Sistem Informasi</option>
+                    <option value="3">Sistem Informasi Akuntansi</option>
+                </select>
+                <span id="val_prodi" hidden> This Field is Required</span></p>
+
+            <p><label for="angk">Angkatan</label>
+                <select name="angk" id="angk" data-rule="#val_angk">
+                    <option value="">Angkatan</option>
+                    <option value="1">2013</option>
+                    <option value="2">2014</option>
+                    <option value="3">2015</option>
+                    <option value="4">2016</option>
+                    <option value="5">2017</option>
+                    <option value="6">2018</option>
+                    <option value="7">2019</option>
+                </select>
+                <span id="val_angk" hidden> This Field is Required</span></p>
+
+
+            <p><label for="password">Password</label> <input name="password" type="password" id="password" data-rule="#val_pass"/> <span id="val_pass" class="err-msg" hidden> Password is empty</span>
+            <p><label for="repassword">Retype Password</label> <input name="repassword" type="password"  data-rule="#val_pass2" id="repassword"/> <span id="val_pass2" class="err-msg" hidden> Re-Password is empty</span>
+            </p>
+            <p><label for="phone">Phone No.</label> <input name="phone" type="number" id="phone" minlength="10"  data-rule="#val_phone"/> <span id="val_phone" class="err-msg" hidden> Your Phone Number is empty</span>
             </p>
 
             <p><label for="birth">Birth Date</label>
@@ -149,12 +175,12 @@
                     <option value="1951">1951</option>
                     <option value="1950">1950</option>
                 </select>
-                <span id="val_bday" hidden>Isi mmk</span></p>
+                <span id="val_bday" hidden> This field is required !</span></p>
 
             <p><label for="gender">Gender</label>
                 <input name="gender" data-rule="#val_gen" type="radio" value="m"/> Male
                 <input name="gender" data-rule="#val_gen" type="radio" value="f"/> Female
-                <span id="val_gen" hidden>Gender is missing !</span>
+                <span id="val_gen" hidden> Gender is missing !</span>
             </p>
 
             <input type="submit" name="submit" value="Register" id="submit">
@@ -226,50 +252,7 @@
                 return false;
             }
 
-
-
         });
-
-        // $('#submit').click(function (e) {
-
-
-            // $('#val_fname').each(function () {
-            //     if ($trim($('#val_fname').val()).length() == 0){
-            //         $('#val_fname').addClass()
-            //     }
-            // })
-
-            // $("form[name='register_form']").validate({
-            //     rules:{
-            //         fname:{
-            //             required: true,
-            //             minlength: 3
-            //         },
-            //         lname:{
-            //             required: true,
-            //             minlengeth: 3
-            //         },
-            //         email:{
-            //             required: true
-            //
-            //         }
-            //     },
-            //     messages:{
-            //         fname: "Field is required !"
-            //     }, submitHandler: function(form){
-            //         form.submit();
-            //     }
-            // });
-        // });
-
-
-
-        // var nama = $("fname").val();
-        //
-        // if(nama.val() == null){
-        //     $("#val_fname").css('display','block');
-        //     return false;
-        // }
 	});
 </script>
 
