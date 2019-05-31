@@ -49,7 +49,7 @@
             <p><label for="password">Password</label> <input name="password" type="password" id="password" data-rule="#val_pass"/> <span id="val_pass" class="err-msg" hidden> Password is empty</span>
             <p><label for="repassword">Retype Password</label> <input name="repassword" type="password"  data-rule="#val_pass2" id="repassword"/> <span id="val_pass2" class="err-msg" hidden> Re-Password is empty</span>
             </p>
-            <p><label for="phone">Phone No.</label> <input name="phone" type="number" id="phone" minlength="10"  data-rule="#val_phone"/> <span id="val_phone" class="err-msg" hidden> Your Phone Number is empty</span>
+            <p><label for="phone">Phone No.</label> <input name="phone" type="number" id="phone"  data-rule="#val_phone"/> <span id="val_phone" class="err-msg" hidden> Your Phone Number is empty</span>
             </p>
 
             <p><label for="birth">Birth Date</label>
@@ -178,8 +178,8 @@
                 <span id="val_bday" hidden> This field is required !</span></p>
 
             <p><label for="gender">Gender</label>
-                <input name="gender" data-rule="#val_gen" type="radio" value="m"/> Male
-                <input name="gender" data-rule="#val_gen" type="radio" value="f"/> Female
+                <input name="gender"  data-rule="#val_gen" type="radio" value="m" id="gender"/> Male
+                <input name="gender"  data-rule="#val_gen" type="radio" value="f"/> Female
                 <span id="val_gen" hidden> Gender is missing !</span>
             </p>
 
@@ -198,20 +198,40 @@
                 err2 = false,
                 err3 = false,
                 err4 = false;
+            var gender = $("form#register_form input[name='gender']");
 
             $(".err-msg").hide()
             //Check input text
             $("input").each(function(){
                 $el = $(this).data("rule");
-                if($(this).val() === ""){
+                if($(this).val() === "" ){
                     $($el).show();
                     err1 = true;
-                    $('.validate_msg').show()
-                } else {
+                    $('.validate_msg').slideDown()
+                } else if (gender.is(':checked') === false ) {
+                    $($el).show();
+                    err1 = true;
+                    $('.validate_msg').slideDown()
+                }
+
+                else {
                     $($el).hide()
 
                 }
             });
+
+            //check rb
+            // $().each(function(){
+            //     $el = $(this).data("rule");
+            //     if($("form#register_form input[name='gender']").is(':checked') === false ){
+            //         $($el).show();
+            //         err1 = true;
+            //         $('.validate_msg').slideDown()
+            //     } else {
+            //         $($el).hide()
+            //
+            //     }
+            // });
 
             //Check select type
             $("select").each(function(){
@@ -223,7 +243,7 @@
                 } else {
                     $($el).hide()
                 }
-            })
+            });
 
             if($("input[name=repassword]").val() !== "" && $("input[name=repassword]").val() !== $("input[name=password]").val()){
                 $("#val_pass2").text("Password type doesn't match")

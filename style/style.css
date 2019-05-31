@@ -45,11 +45,16 @@ form#register_form input[type='text'], input[type='password'] {
 	padding:5px;
 }
 
-form#register_form select[name="prodi"], select[name="angkatan"]  {
-	width: 200px;
+form#register_form select[name="prodi"], select[name="angk"]  {
+    border: 1px solid #CCCCCC;
+    display: inline-block;
+    margin: 0;
+    padding: 5px 0;
+    width: 200px;
 }
 
-form#register_form select {
+
+form#register_form select[name="month"], select[name="day"], select[name="year"]   {
     border: 1px solid #CCCCCC;
     display: inline-block;
     margin: 0;
@@ -75,7 +80,7 @@ p.validate_msg {
 	display:none;
 	margin-bottom:25px
 }
-span.validate  {
+span  {
 	color:#F00;
 	padding-left:8px;
 	font-style:italic;
